@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Земельные участки в Сочи - подборка и показ</title>
+<meta name="description" content="Подборка земельных участков в Сочи с проверкой документов. Оставьте заявку, и риелтор вышлет участки и назначит показ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sea: #0e3a4a;        /* глубокая морская вода */
+    --sea-2: #1c5a6e;
+    --cypress: #2a4b3f;
+    --stone: #f6f7f5;      /* известняк, холодный белый */
+    --paper: #ffffff;
+    --ink: #17252b;
+    --muted: #55656b;
+    --line: #d8dedc;
+    --mandarin: #e6862a;   /* мандарин - только для главных кнопок */
+    --mandarin-d: #c96f17;
+    --todo: #8F7212;
+    --head: 'Playfair Display', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--stone); color: var(--ink); font: 400 17px/1.6 var(--body); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--mandarin); outline-offset: 3px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+  /* пометки для заказчика */
+  .todo { color: var(--todo); font-weight: 500; }
+
+  /* шапка */
+  .top { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+  .brand { font: 700 21px/1 var(--head); text-decoration: none; color: var(--sea); }
+  .top-right { display: flex; align-items: center; gap: 20px; }
+  .tel { font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+  .btn { display: inline-block; border: 0; cursor: pointer; background: var(--mandarin); color: #1b1206; font: 600 17px/1 var(--body); padding: 16px 26px; border-radius: 10px; text-decoration: none; transition: background .15s; }
+  .btn:hover { background: var(--mandarin-d); }
+  .btn.small { padding: 12px 18px; font-size: 15px; }
+  .btn.ghost { background: transparent; border: 1.5px solid var(--sea); color: var(--sea); }
+  .btn.ghost:hover { background: var(--sea); color: #fff; }
+
+  /* первый экран */
+  .hero { padding: 44px 0 56px; }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); gap: 44px; align-items: start; }
+  h1 { font: 700 clamp(34px, 4.6vw, 54px)/1.08 var(--head); margin: 0 0 18px; color: var(--sea); letter-spacing: -.01em; }
+  .lead { font-size: 19px; color: var(--muted); max-width: 52ch; margin: 0 0 22px; }
+  .checks { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 10px; }
+  .checks li { padding-left: 32px; position: relative; font-weight: 500; }
+  .checks li::before { content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--cypress); }
+  .checks li::after { content: ""; position: absolute; left: 7px; top: 8px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+  .form { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 24px; box-shadow: 0 18px 40px -26px rgba(14, 58, 74, .45); max-width: 520px; }
+  .form h2 { font: 700 24px/1.2 var(--head); margin: 0 0 4px; color: var(--sea); }
+  .form p.sub { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+  input[type=text], input[type=tel], select { width: 100%; font: 400 17px var(--body); padding: 13px 14px; border: 1.5px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); }
+  input:focus, select:focus { border-color: var(--sea-2); outline: none; box-shadow: 0 0 0 3px rgba(28, 90, 110, .2); }
+  .consent { display: flex; gap: 10px; font-size: 13.5px; color: var(--muted); margin: 6px 0 16px; align-items: flex-start; }
+  .consent input { margin-top: 3px; width: 18px; height: 18px; flex: none; }
+  .form .btn { width: 100%; }
+  .status { margin-top: 12px; font-size: 15px; font-weight: 500; color: var(--cypress); min-height: 1.4em; }
+
+  /* карта участков */
+  .plan { position: relative; border-radius: 22px; overflow: hidden; background: var(--sea); aspect-ratio: 520 / 600; max-height: 640px; width: 100%; }
+  .plan svg { display: block; width: 100%; height: 100%; }
+  .plan .land { fill: #e4ebe6; }
+  .plan .parcel { fill: rgba(42, 75, 63, .14); stroke: var(--cypress); stroke-width: 2; stroke-linejoin: round; }
+  .plan .parcel.on { fill: rgba(230, 134, 42, .9); stroke: #8a4a08; }
+  .plan .hatch { stroke: rgba(42, 75, 63, .35); stroke-width: 1.2; }
+  .plan .num { font: 700 20px var(--head); fill: var(--cypress); text-anchor: middle; }
+  .plan .num.on { fill: #2a1500; }
+  .plan .contour { fill: none; stroke: rgba(42, 75, 63, .22); stroke-width: 1.2; }
+  .plan .road { fill: none; stroke: #fff; stroke-width: 12; stroke-linecap: round; }
+  .plan .road-line { fill: none; stroke: #b8c4bd; stroke-width: 1.5; stroke-dasharray: 8 8; }
+  .plan .wave { fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: 1.5; }
+  .plan .sea-t { font: italic 500 22px var(--head); fill: rgba(255, 255, 255, .85); }
+  .plan .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s ease-out .15s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .callout { position: absolute; left: 14px; right: 14px; bottom: 14px; background: var(--paper); border-radius: 12px; padding: 14px 16px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: baseline; font-size: 15px; }
+  .callout b { font: 700 18px var(--head); color: var(--sea); grid-row: span 2; }
+
+  /* общие секции */
+  section.block { padding: 64px 0; }
+  section.block.alt { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  h2.title { font: 700 clamp(28px, 3.4vw, 38px)/1.15 var(--head); margin: 0 0 12px; color: var(--sea); }
+  .intro { color: var(--muted); max-width: 60ch; margin: 0 0 32px; }
+
+  /* карточки участков */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .card .ph { height: 150px; background: linear-gradient(160deg, #cfdcd4, #e9efe9); display: grid; place-items: center; border-bottom: 1px solid var(--line); font-size: 14px; text-align: center; padding: 10px; }
+  .card .in { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .card h3 { font: 700 21px/1.2 var(--head); margin: 0; color: var(--sea); }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 15px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  .card .btn { margin-top: auto; text-align: center; }
+  .more { margin-top: 20px; color: var(--muted); }
+
+  /* что проверяем */
+  .two { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start; }
+  .checklist { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .checklist li { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr; gap: 2px; }
+  .checklist strong { font: 700 19px var(--head); color: var(--sea); }
+  .checklist span { color: var(--muted); font-size: 15.5px; }
+
+  /* порядок работы - реальная последовательность */
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: s; }
+  .steps li { counter-increment: s; padding: 4px 22px 0 0; border-top: 3px solid var(--sea); position: relative; }
+  .steps li::before { content: counter(s); position: absolute; top: -17px; left: 0; width: 31px; height: 31px; border-radius: 50%; background: var(--sea); color: #fff; font: 700 16px/31px var(--head); text-align: center; }
+  .steps h3 { font: 700 19px/1.25 var(--head); margin: 24px 0 6px; color: var(--sea); }
+  .steps p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* о риелторе */
+  .person { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: center; }
+  .avatar { aspect-ratio: 1; border-radius: 50%; background: linear-gradient(150deg, #c9d8d0, #e8eee9); display: grid; place-items: center; text-align: center; padding: 18px; font-size: 14px; border: 1px solid var(--line); }
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .rev { border: 1px dashed var(--todo); border-radius: 12px; padding: 16px; font-size: 15px; background: #fffdf4; }
+
+  /* вопросы */
+  details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font: 700 19px/1.3 var(--head); color: var(--sea); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font: 400 26px/1 var(--body); color: var(--mandarin-d); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 10px 0 0; color: var(--muted); max-width: 70ch; }
+
+  /* финальная заявка */
+  .final { background: var(--sea); color: #fff; padding: 64px 0; }
+  .final .wrap { display: grid; grid-template-columns: 1fr minmax(0, 480px); gap: 48px; align-items: center; }
+  .final h2 { font: 700 clamp(28px, 3.4vw, 40px)/1.15 var(--head); margin: 0 0 14px; }
+  .final p { color: #c8dbe0; max-width: 46ch; margin: 0; }
+  .final .form { color: var(--ink); }
+  .msgr { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .msgr a { background: var(--paper); color: var(--ink); padding: 11px 16px; border-radius: 10px; text-decoration: none; font-size: 15px; font-weight: 500; }
+
+  footer { background: var(--paper); border-top: 1px solid var(--line); padding: 26px 0 34px; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: grid; gap: 6px; }
+
+  @media (max-width: 960px) {
+    .hero .wrap, .two, .final .wrap { grid-template-columns: 1fr; }
+    .cards, .reviews { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+    .plan { max-height: 520px; }
+    .person { grid-template-columns: 1fr; }
+    .avatar { max-width: 180px; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .tel { display: none; }
+    .row { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .hero { padding-top: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .plan .draw { animation: none; stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Участки в Сочи</a>
+    <div class="top-right">
+      <a class="tel" href="tel:+78888888888">8 (888) 888-88-88</a>
+      <a class="btn small" href="#zayavka">Получить подборку</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Земельные участки в Сочи с проверенными документами</h1>
+      <p class="lead">Оставьте номер, и риелтор пришлёт подборку участков группы: площадь, цена, расположение на карте. Покажем на месте в удобный день.</p>
+      <ul class="checks">
+        <li>Документы проверяем до показа</li>
+        <li>Участки одной группы, можно сравнить рядом</li>
+        <li>Отвечаем в день обращения: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> часов работы</li>
+      </ul>
+      <form class="form" id="zayavka" data-form novalidate>
+        <h2>Получить подборку участков</h2>
+        <p class="sub">Пришлём список с ценами и планом на выбранный мессенджер.</p>
+        <div class="row">
+          <div><label for="n1">Имя</label><input id="n1" type="text" name="name" autocomplete="given-name" placeholder="Как к вам обращаться"></div>
+          <div><label for="p1">Телефон</label><input id="p1" type="tel" name="phone" autocomplete="tel" placeholder="+7" required></div>
+        </div>
+        <div style="margin-bottom:12px">
+          <label for="m1">Где удобнее получить подборку</label>
+          <select id="m1" name="channel">
+            <option>Звонок</option><option>Telegram</option><option>MAX</option><option>ВКонтакте</option><option>WhatsApp</option>
+          </select>
+        </div>
+        <label class="consent"><input type="checkbox" required> <span>Согласен на обработку персональных данных и с <a href="#policy">политикой конфиденциальности</a></span></label>
+        <button class="btn" type="submit">Получить подборку участков</button>
+        <div class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="plan" aria-label="Схема расположения участков группы">
+      <svg viewBox="0 0 520 600" role="img" aria-label="Схема: шесть участков у побережья, участок 5 выделен">
+        <defs>
+          <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c5a6e"/><stop offset="1" stop-color="#0b2f3d"/></linearGradient>
+        </defs>
+        <rect width="520" height="600" fill="url(#sg)"/>
+        <path class="land" d="M0 0 H520 V410 C440 392 380 430 290 424 C190 418 120 386 0 412 Z"/>
+        <path class="contour" d="M0 60 C140 30 300 90 520 50"/>
+        <path class="contour" d="M0 130 C150 100 320 160 520 120"/>
+        <path class="contour" d="M0 215 C160 190 330 245 520 205"/>
+        <g>
+          <polygon class="parcel draw" pathLength="1" points="40,70 190,50 210,160 60,182"/>
+          <polygon class="parcel draw" pathLength="1" points="190,50 340,58 350,150 210,160"/>
+          <polygon class="parcel draw" pathLength="1" points="340,58 480,80 468,178 350,150"/>
+          <polygon class="parcel draw" pathLength="1" points="60,182 210,160 232,262 80,284"/>
+          <polygon class="parcel on draw" pathLength="1" points="210,160 350,150 372,252 232,262"/>
+          <polygon class="parcel draw" pathLength="1" points="350,150 468,178 458,282 372,252"/>
+        </g>
+        <path class="hatch" d="M232 262 L350 150 M262 262 L372 170 M300 262 L372 200"/>
+        <text class="num" x="124" y="128">1</text>
+        <text class="num" x="270" y="116">2</text>
+        <text class="num" x="408" y="132">3</text>
+        <text class="num" x="150" y="232">4</text>
+        <text class="num on" x="296" y="214">5</text>
+        <text class="num" x="418" y="236">6</text>
+        <path class="road" d="M-10 330 C130 306 300 344 530 318"/>
+        <path class="road-line" d="M-10 330 C130 306 300 344 530 318"/>
+        <path class="wave" d="M0 470 C60 456 100 484 160 470 S260 456 320 472 S440 486 520 468"/>
+        <path class="wave" d="M0 520 C70 506 110 534 180 520 S290 506 350 522 S460 534 520 516"/>
+        <text class="sea-t" x="28" y="452">Чёрное море</text>
+      </svg>
+      <div class="callout">
+        <b>Участок 5</b>
+        <span><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> сот.</span>
+        <span>Цена: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="uchastki">
+  <div class="wrap">
+    <h2 class="title">Участки в подборке</h2>
+    <p class="intro">Показываем три из группы. Полный список с планом и документами пришлём после заявки.</p>
+    <div class="cards">
+      <article class="card">
+        <div class="ph"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt; фото участка</span></div>
+        <div class="in">
+          <h3>Участок 5</h3>
+          <dl>
+            <dt>Район</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Площадь</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Назначение</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Коммуникации</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Цена</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+          </dl>
+          <a class="btn small" href="#zayavka">Узнать подробности</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt; фото участка</span></div>
+        <div class="in">
+          <h3>Участок 2</h3>
+          <dl>
+            <dt>Район</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Площадь</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Назначение</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Коммуникации</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Цена</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+          </dl>
+          <a class="btn small" href="#zayavka">Узнать подробности</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt; фото участка</span></div>
+        <div class="in">
+          <h3>Участок 6</h3>
+          <dl>
+            <dt>Район</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Площадь</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Назначение</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Коммуникации</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+            <dt>Цена</dt><dd class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</dd>
+          </dl>
+          <a class="btn small" href="#zayavka">Узнать подробности</a>
+        </div>
+      </article>
+    </div>
+    <p class="more">Всего участков в группе: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span></p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap two">
+    <div>
+      <h2 class="title">Что проверяем перед показом</h2>
+      <p class="intro">Земля без проверки - самый дорогой риск. Перед тем как показать участок, смотрим документы.</p>
+      <p class="intro" style="margin:0">Полный состав проверки: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span></p>
+    </div>
+    <ul class="checklist">
+      <li><strong>Категория земель и вид использования</strong><span>Можно ли строить жилой дом, а не только огород.</span></li>
+      <li><strong>Границы и межевание</strong><span>Участок стоит на кадастре, границы совпадают с планом.</span></li>
+      <li><strong>Права и обременения</strong><span>Собственник тот, кто продаёт, нет арестов и залогов.</span></li>
+      <li><strong>Подъезд и коммуникации</strong><span>Дорога, свет, вода, газ: что есть и что придётся подводить.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap">
+    <h2 class="title">Как проходит покупка</h2>
+    <p class="intro">Четыре шага от заявки до сделки.</p>
+    <ol class="steps">
+      <li><h3>Заявка</h3><p>Оставляете номер и выбираете, куда прислать подборку.</p></li>
+      <li><h3>Подборка</h3><p>Присылаем участки с ценами, планом и документами.</p></li>
+      <li><h3>Показ на месте</h3><p>Едем смотреть выбранные участки в удобный день.</p></li>
+      <li><h3>Сделка</h3><p>Сопровождение сделки: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> что входит и сколько стоит.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="person">
+      <div class="avatar"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt; фото риелтора</span></div>
+      <div>
+        <h2 class="title">Кто ведёт сделку</h2>
+        <p class="intro" style="margin:0 0 10px"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> имя, опыт работы с землёй в Сочи, количество закрытых сделок.</p>
+        <p class="intro" style="margin:0">Агентство и реквизиты: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span></p>
+      </div>
+    </div>
+    <div class="reviews">
+      <div class="rev"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> отзыв клиента, имя и фото</div>
+      <div class="rev"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> отзыв клиента, имя и фото</div>
+      <div class="rev"><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> отзыв клиента, имя и фото</div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap" style="max-width:860px">
+    <h2 class="title">Частые вопросы</h2>
+    <details><summary>Можно ли построить на участке дом?</summary><p>Зависит от категории земель и вида разрешённого использования. Это первое, что мы проверяем по каждому участку, и называем вам до показа.</p></details>
+    <details><summary>Можно ли купить с ипотекой или в рассрочку?</summary><p><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> условия оплаты, ипотека, рассрочка.</p></details>
+    <details><summary>Сколько стоит ваша работа?</summary><p><span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span> оплачивает ли покупатель комиссию и в каком размере.</p></details>
+    <details><summary>Можно ли посмотреть участок без вас?</summary><p>Адрес и подъезд пришлём вместе с подборкой. На показ лучше поехать вместе, чтобы сразу сверить границы по плану.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div>
+      <h2>Пришлём подборку участков сегодня</h2>
+      <p>Оставьте номер или напишите в мессенджер. Ответим в рабочее время: <span style="color:#f2d27a">&lt;&lt;запросить у заказчика&gt;&gt;</span>.</p>
+      <div class="msgr">
+        <a href="tel:+78888888888">8 (888) 888-88-88</a>
+        <a href="#" aria-disabled="true">Telegram: <span class="todo">&lt;&lt;запросить&gt;&gt;</span></a>
+        <a href="#" aria-disabled="true">MAX: <span class="todo">&lt;&lt;запросить&gt;&gt;</span></a>
+        <a href="#" aria-disabled="true">ВК: <span class="todo">&lt;&lt;запросить&gt;&gt;</span></a>
+      </div>
+    </div>
+    <form class="form" data-form novalidate>
+      <h2>Получить подборку участков</h2>
+      <p class="sub">Перезвоним или напишем в выбранный мессенджер.</p>
+      <div class="row">
+        <div><label for="n2">Имя</label><input id="n2" type="text" name="name" autocomplete="given-name"></div>
+        <div><label for="p2">Телефон</label><input id="p2" type="tel" name="phone" autocomplete="tel" placeholder="+7" required></div>
+      </div>
+      <label class="consent"><input type="checkbox" required> <span>Согласен на обработку персональных данных и с <a href="#policy">политикой конфиденциальности</a></span></label>
+      <button class="btn" type="submit">Получить подборку участков</button>
+      <div class="status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer id="policy">
+  <div class="wrap">
+    <div>Политика конфиденциальности и реквизиты: <span class="todo">&lt;&lt;запросить у заказчика&gt;&gt;</span></div>
+    <div>Демонстрационный макет, не является официальным сайтом организации.</div>
+  </div>
+</footer>
+
+<script>
+  // Демо: отправка не подключена, форма только проверяет поля и показывает ответ.
+  document.querySelectorAll('[data-form]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = form.querySelector('.status');
+      var phone = form.querySelector('input[type=tel]');
+      var consent = form.querySelector('input[type=checkbox]');
+      var digits = phone.value.replace(/\D/g, '');
+      if (digits.length < 10) { status.textContent = 'Введите телефон полностью, например +7 900 000-00-00.'; phone.focus(); return; }
+      if (!consent.checked) { status.textContent = 'Отметьте согласие на обработку данных.'; consent.focus(); return; }
+      status.textContent = 'Заявка принята. В демо отправка не подключена.';
+    });
+  });
+</script>
+</body>
+</html>
